@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>top.top6699</groupId>
-    <artifactId>mall</artifactId>
+    <artifactId>south_mall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mall</name>
     <description>Demo project for Spring Boot</description>
