@@ -2,6 +2,8 @@ package top.top6699.mall.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.top6699.mall.exception.SouthMallException;
+import top.top6699.mall.exception.SouthMallExceptionEnum;
 import top.top6699.mall.model.dao.UserMapper;
 import top.top6699.mall.model.pojo.User;
 import top.top6699.mall.service.UserService;
@@ -19,5 +21,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser() {
         return userMapper.selectByPrimaryKey(3);
+    }
+
+    @Override
+    public void register(String username, String password) throws SouthMallException {
+        //查询用户名是否存在，不允许重复名
+        User result = userMapper.selectByName(username);
+        if (result != null) {
+            //存在该用户
+            throw new SouthMallException(SouthMallExceptionEnum.NAME_EXISTED);
+        }
+        //存入数据库
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        int count = userMapper.insertSelective(user);
+        if (count == 0) {
+            //注册失败
+            throw new SouthMallException(SouthMallExceptionEnum.INSERT_FAILED);
+        }
+
     }
 }

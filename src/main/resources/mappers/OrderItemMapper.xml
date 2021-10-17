@@ -20,15 +20,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from imooc_mall_order_item
+    from south_mall_order_item
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from imooc_mall_order_item
+    delete from south_mall_order_item
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="top.top6699.mall.model.pojo.OrderItem" useGeneratedKeys="true">
-    insert into imooc_mall_order_item (order_no, product_id, product_name, 
+    insert into south_mall_order_item (order_no, product_id, product_name, 
       product_img, unit_price, quantity, 
       total_price, create_time, update_time
       )
@@ -38,7 +38,7 @@
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="top.top6699.mall.model.pojo.OrderItem" useGeneratedKeys="true">
-    insert into imooc_mall_order_item
+    insert into south_mall_order_item
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderNo != null">
         order_no,
@@ -99,7 +99,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="top.top6699.mall.model.pojo.OrderItem">
-    update imooc_mall_order_item
+    update south_mall_order_item
     <set>
       <if test="orderNo != null">
         order_no = #{orderNo,jdbcType=VARCHAR},
@@ -132,7 +132,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="top.top6699.mall.model.pojo.OrderItem">
-    update imooc_mall_order_item
+    update south_mall_order_item
     set order_no = #{orderNo,jdbcType=VARCHAR},
       product_id = #{productId,jdbcType=INTEGER},
       product_name = #{productName,jdbcType=VARCHAR},

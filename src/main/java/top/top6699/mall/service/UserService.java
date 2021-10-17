@@ -1,5 +1,6 @@
 package top.top6699.mall.service;
 
+import top.top6699.mall.exception.SouthMallException;
 import top.top6699.mall.model.pojo.User;
 
 /**
@@ -9,4 +10,6 @@ import top.top6699.mall.model.pojo.User;
  **/
 public interface UserService {
     User getUser();
+
+    void register(String username, String password) throws SouthMallException;
 }
