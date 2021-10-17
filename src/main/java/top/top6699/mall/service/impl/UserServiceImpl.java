@@ -7,6 +7,9 @@ import top.top6699.mall.exception.SouthMallExceptionEnum;
 import top.top6699.mall.model.dao.UserMapper;
 import top.top6699.mall.model.pojo.User;
 import top.top6699.mall.service.UserService;
+import top.top6699.mall.util.MD5Utils;
+
+import java.security.NoSuchAlgorithmException;
 
 /**
  * @author LongHaiJiang
@@ -34,7 +37,13 @@ public class UserServiceImpl implements UserService {
         //存入数据库
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
+        // user.setPassword(password);
+        //对密码进行md5加密
+        try {
+            user.setPassword(MD5Utils.getMD5Str(password));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         int count = userMapper.insertSelective(user);
         if (count == 0) {
             //注册失败
