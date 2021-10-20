@@ -25,6 +25,13 @@
         FROM south_mall_user
         WHERE username = #{username,jdbcType=VARCHAR}
     </select>
+    <select id="selectLogin" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM south_mall_user
+        WHERE username = #{username,jdbcType=VARCHAR}
+        And password = #{password}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         DELETE
         FROM south_mall_user
@@ -32,8 +39,8 @@
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="top.top6699.mall.model.pojo.User"
             useGeneratedKeys="true">
-        INSERT INTO south_mall_user (username, `password`, personalized_signature,
-                                     `role`, create_time, update_time)
+        INSERT INTO south_mall_user (username, `PASSWORD`, personalized_signature,
+                                     `ROLE`, create_time, update_time)
         VALUES (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{personalizedSignature,jdbcType=VARCHAR},
                 #{role,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
     </insert>
@@ -108,9 +115,9 @@
     <update id="updateByPrimaryKey" parameterType="top.top6699.mall.model.pojo.User">
         UPDATE south_mall_user
         SET username               = #{username,jdbcType=VARCHAR},
-            `password`             = #{password,jdbcType=VARCHAR},
+            `PASSWORD`             = #{password,jdbcType=VARCHAR},
             personalized_signature = #{personalizedSignature,jdbcType=VARCHAR},
-            `role`                 = #{role,jdbcType=INTEGER},
+            `ROLE`                 = #{role,jdbcType=INTEGER},
             create_time            = #{createTime,jdbcType=TIMESTAMP},
             update_time            = #{updateTime,jdbcType=TIMESTAMP}
         WHERE id = #{id,jdbcType=INTEGER}

@@ -51,4 +51,38 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+
+    @Override
+    public User login(String username, String password) throws SouthMallException {
+        String md5Password = null;
+        try {
+            md5Password = MD5Utils.getMD5Str(password);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        User user = userMapper.selectLogin(username, md5Password);
+        if (user == null) {
+            throw new SouthMallException(SouthMallExceptionEnum.WRONG_PASSWORD);
+        }
+        return user;
+    }
+
+    /**
+     * 更新个性签名
+     */
+    @Override
+    public void updateInformation(User user) throws SouthMallException {
+        int updateCount = userMapper.updateByPrimaryKeySelective(user);
+        if (updateCount > 1) {
+            throw new SouthMallException(SouthMallExceptionEnum.UPDATE_FAILED);
+        }
+    }
+
+    @Override
+    public boolean checkAdminRole(User user){
+        // 1.普通用户
+        // 2.管理员用户
+        return user.getRole().equals(2);
+
+    }
 }

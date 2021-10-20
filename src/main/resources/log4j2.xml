@@ -3,6 +3,7 @@
     <Properties>
         <!--log日志所在位置-->
         <Property name="baseDir" value="E:\log4j2\logs"/>
+
     </Properties>
 
     <Appenders>

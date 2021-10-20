@@ -8,7 +8,7 @@ import top.top6699.mall.exception.SouthMallExceptionEnum;
  * @description
  **/
 public class ApiRestResponse<T> {
-    private Integer status;
+    private Integer code;
     private String msg;
     private T data;
     private static final int OK_CODE = 10000;
@@ -18,13 +18,13 @@ public class ApiRestResponse<T> {
         this(OK_CODE, OK_MSG);
     }
 
-    public ApiRestResponse(Integer status, String msg) {
-        this.status = status;
+    public ApiRestResponse(Integer code, String msg) {
+        this.code = code;
         this.msg = msg;
     }
 
-    public ApiRestResponse(Integer status, String msg, T data) {
-        this.status = status;
+    public ApiRestResponse(Integer code, String msg, T data) {
+        this.code = code;
         this.msg = msg;
         this.data = data;
     }
@@ -47,12 +47,12 @@ public class ApiRestResponse<T> {
         return new ApiRestResponse<>(exceptionEnum.getCode(), exceptionEnum.getMsg());
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     public String getMsg() {
@@ -74,7 +74,7 @@ public class ApiRestResponse<T> {
     @Override
     public String toString() {
         return "ApiRestResponse{" +
-                "status=" + status +
+                "status=" + code +
                 ", msg='" + msg + '\'' +
                 ", data=" + data +
                 '}';

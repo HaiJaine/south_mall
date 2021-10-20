@@ -12,4 +12,10 @@ public interface UserService {
     User getUser();
 
     void register(String username, String password) throws SouthMallException;
+
+    User login(String username, String password) throws SouthMallException;
+
+    void updateInformation(User user) throws SouthMallException;
+
+    boolean checkAdminRole(User user);
 }

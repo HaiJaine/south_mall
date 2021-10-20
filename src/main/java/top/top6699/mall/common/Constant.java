@@ -7,5 +7,8 @@ package top.top6699.mall.common;
  **/
 public class Constant {
     //盐值
-    public static final String SALT = "gfja4698765143sdgf78946984as6df4as65g7869";
+    public static final String SALT = "gf1ja46'['!987,653s1dgf789*469!!84a$s6s65#$g7869";
+
+    //
+    public static final String SOUTH_MALL_USER = "south_mall_user";
 }
