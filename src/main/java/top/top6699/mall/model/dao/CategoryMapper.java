@@ -3,6 +3,8 @@ package top.top6699.mall.model.dao;
 import org.springframework.stereotype.Repository;
 import top.top6699.mall.model.pojo.Category;
 
+import java.util.List;
+
 @Repository
 public interface CategoryMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +18,10 @@ public interface CategoryMapper {
     int updateByPrimaryKeySelective(Category record);
 
     int updateByPrimaryKey(Category record);
+
+    Category selectByName(String name);
+
+    List<Category> selectList();
+
+    List<Category> selectCategoriesByParentId(Integer parentId);
 }

@@ -5,7 +5,7 @@ package top.top6699.mall.exception;
  * @date 2021/10/15 23:19
  * @description 统一异常
  **/
-public class SouthMallException extends Exception {
+public class SouthMallException extends RuntimeException {
     private final Integer code;
     private final String message;
 

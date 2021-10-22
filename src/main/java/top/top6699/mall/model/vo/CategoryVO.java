@@ -1,45 +1,40 @@
-package top.top6699.mall.model.pojo;
+package top.top6699.mall.model.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class Category implements Serializable {
-    /**
-     * 主键
-     */
+/**
+ * @author LongHaiJiang
+ * @date 2021/10/22 17:39
+ * @description
+ **/
+public class CategoryVO implements Serializable {
+
     private Integer id;
 
-    /**
-     * 分类目录名称
-     */
     private String name;
 
-    /**
-     * 分类目录级别，例如1代表一级，2代表二级，3代表三级
-     */
     private Integer type;
 
-    /**
-     * 父id，也就是上一级目录的id，如果是一级目录，那么父id为0
-     */
     private Integer parentId;
 
-    /**
-     * 目录展示时的排序
-     */
     private Integer orderNum;
 
-    /**
-     * 创建时间
-     */
     private Date createTime;
 
-    /**
-     * 更新时间
-     */
     private Date updateTime;
 
-    private static final long serialVersionUID = 1L;
+    private List<CategoryVO> childCategory = new ArrayList<>();
+
+    public List<CategoryVO> getChildCategory() {
+        return childCategory;
+    }
+
+    public void setChildCategory(List<CategoryVO> childCategory) {
+        this.childCategory = childCategory;
+    }
 
     public Integer getId() {
         return id;
@@ -54,7 +49,7 @@ public class Category implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public Integer getType() {

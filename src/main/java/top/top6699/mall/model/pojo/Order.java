@@ -3,10 +3,6 @@ package top.top6699.mall.model.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * imooc_mall_order
- * @author 
- */
 public class Order implements Serializable {
     /**
      * 主键id

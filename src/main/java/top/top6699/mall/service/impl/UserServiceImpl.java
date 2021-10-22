@@ -22,11 +22,6 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public User getUser() {
-        return userMapper.selectByPrimaryKey(3);
-    }
-
-    @Override
     public void register(String username, String password) throws SouthMallException {
         //查询用户名是否存在，不允许重复名
         User result = userMapper.selectByName(username);

@@ -11,4 +11,5 @@ public class Constant {
 
     //
     public static final String SOUTH_MALL_USER = "south_mall_user";
+    public static String FILE_UPLOAD_DIR;
 }

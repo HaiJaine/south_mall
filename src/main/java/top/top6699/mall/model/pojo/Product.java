@@ -3,10 +3,6 @@ package top.top6699.mall.model.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * imooc_mall_product
- * @author 
- */
 public class Product implements Serializable {
     /**
      * 商品主键id

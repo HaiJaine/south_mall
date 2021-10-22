@@ -29,6 +29,7 @@ public class ApiRestResponse<T> {
         this.data = data;
     }
 
+
     public static <T> ApiRestResponse<T> success() {
         return new ApiRestResponse<>();
     }
@@ -77,6 +78,7 @@ public class ApiRestResponse<T> {
                 "status=" + code +
                 ", msg='" + msg + '\'' +
                 ", data=" + data +
-                '}';
+                '}' ;
     }
+
 }

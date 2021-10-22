@@ -9,7 +9,6 @@ import top.top6699.mall.model.pojo.User;
  * @description UserService
  **/
 public interface UserService {
-    User getUser();
 
     void register(String username, String password) throws SouthMallException;
 

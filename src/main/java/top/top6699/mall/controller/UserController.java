@@ -19,19 +19,12 @@ import javax.servlet.http.HttpSession;
  * @description 用户Controller
  **/
 @Controller
-@RequestMapping("user")
 public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/test")
     @ResponseBody
-    public User personalPage() {
-        return userService.getUser();
-    }
-
-    @ResponseBody
-    @PostMapping("register")
+    @PostMapping("user/register")
     public ApiRestResponse register(@RequestParam("username") String username,
                                     @RequestParam("password") String password) throws SouthMallException {
         //利用Spring框架中的StringUtils.isEmpty方式来判断是否为空
@@ -50,7 +43,7 @@ public class UserController {
     }
 
     @ResponseBody
-    @PostMapping("login")
+    @PostMapping("user/login")
     public ApiRestResponse login(@RequestParam("username") String username,
                                  @RequestParam("password") String password,
                                  HttpSession session) throws SouthMallException {
@@ -72,7 +65,7 @@ public class UserController {
         return ApiRestResponse.success(user);
     }
 
-    @PostMapping("/update")
+    @PostMapping("user/update")
     @ResponseBody
     public ApiRestResponse updateUserInfo(HttpSession session, @RequestParam("signature") String signature) throws SouthMallException {
         User currentUser = (User) session.getAttribute(Constant.SOUTH_MALL_USER);
@@ -86,7 +79,7 @@ public class UserController {
         return ApiRestResponse.success();
     }
 
-    @PostMapping("/logout")
+    @PostMapping("user/logout")
     @ResponseBody
     public ApiRestResponse logout(HttpSession session) {
         session.removeAttribute(Constant.SOUTH_MALL_USER);
@@ -94,7 +87,7 @@ public class UserController {
     }
 
     @ResponseBody
-    @PostMapping("adminLogin")
+    @PostMapping("user/adminLogin")
     public ApiRestResponse adminLogin(@RequestParam("username") String username,
                                       @RequestParam("password") String password,
                                       HttpSession session) throws SouthMallException {
@@ -119,7 +112,7 @@ public class UserController {
             return ApiRestResponse.success(user);
         } else {
             //不是管理员
-            return ApiRestResponse.error(SouthMallExceptionEnum.NOT_ADMIN);
+            return ApiRestResponse.error(SouthMallExceptionEnum.NEED_ADMIN);
         }
     }
 }

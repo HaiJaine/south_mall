@@ -3,10 +3,7 @@ package top.top6699.mall.model.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * imooc_mall_user
- * @author 
- */
+
 public class User implements Serializable {
     /**
      * 用户id
