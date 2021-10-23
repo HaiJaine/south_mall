@@ -3,6 +3,8 @@ package top.top6699.mall.model.dao;
 import org.springframework.stereotype.Repository;
 import top.top6699.mall.model.pojo.OrderItem;
 
+import java.util.List;
+
 @Repository
 public interface OrderItemMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +18,6 @@ public interface OrderItemMapper {
     int updateByPrimaryKeySelective(OrderItem record);
 
     int updateByPrimaryKey(OrderItem record);
+
+    List<OrderItem> selectByOrderNo(String orderNo);
 }
