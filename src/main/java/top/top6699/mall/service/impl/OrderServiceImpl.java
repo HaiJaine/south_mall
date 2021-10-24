@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import top.top6699.mall.QRCodeGenerator;
+import top.top6699.mall.util.QRCodeGenerator;
 import top.top6699.mall.common.Constant;
 import top.top6699.mall.exception.SouthMallException;
 import top.top6699.mall.exception.SouthMallExceptionEnum;

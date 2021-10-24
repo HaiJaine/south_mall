@@ -1,4 +1,4 @@
-package top.top6699.mall;
+package top.top6699.mall.util;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;

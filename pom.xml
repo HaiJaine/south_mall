@@ -84,7 +84,13 @@
             <artifactId>javase</artifactId>
             <version>3.3.0</version>
         </dependency>
-
+        <!--<dependency>-->
+        <!--    <groupId>top.top6699</groupId>-->
+        <!--    <artifactId>anti-piracy</artifactId>-->
+        <!--    <version>0.0.1-SNAPSHOT</version>-->
+        <!--    <scope>system</scope>-->
+        <!--    <systemPath>${project.basedir}/src/main/resources/lib/anti-piracy.jar</systemPath>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
