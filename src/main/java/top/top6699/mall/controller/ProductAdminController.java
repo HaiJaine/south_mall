@@ -44,6 +44,7 @@ public class ProductAdminController {
     public ApiRestResponse upload(HttpServletRequest httpServletRequest,
                                   @RequestParam("file") MultipartFile file) {
         String fileName = file.getOriginalFilename();
+        assert fileName != null;
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
         //生成文件名称UUID
         UUID uuid = UUID.randomUUID();

@@ -2,6 +2,7 @@ package top.top6699.mall.common;
 
 import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import top.top6699.mall.exception.SouthMallException;
 import top.top6699.mall.exception.SouthMallExceptionEnum;
 
@@ -12,6 +13,7 @@ import java.util.Set;
  * @date 2021/10/17 23:25
  * @description 常量值
  **/
+@Component
 public class Constant {
     //盐值
     public static final String SALT = "gf1ja46'['!987,653s1dgf789*469!!84a$s6s65#$g7869";

@@ -22,4 +22,5 @@ public class SouthMallWebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/webjars/**").addResourceLocations(
                 "classpath:/META-INF/resources/webjars/");
     }
+
 }
