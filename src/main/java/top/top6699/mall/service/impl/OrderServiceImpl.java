@@ -75,11 +75,11 @@ public class OrderServiceImpl implements OrderService {
         //拿到用户ID
         Integer userId = UserFilter.currentUser.getId();
 
-        //从购物车查找已经勾选的商品
+        //查找购物车中的商品
         List<CartVO> cartVOList = cartService.list(userId);
         ArrayList<CartVO> cartVOListTemp = new ArrayList<>();
-        for (int i = 0; i < cartVOList.size(); i++) {
-            CartVO cartVO = cartVOList.get(i);
+        for (CartVO cartVO : cartVOList) {
+            //把购物车中选中的商品取出来
             if (cartVO.getSelected().equals(Constant.Cart.CHECKED)) {
                 cartVOListTemp.add(cartVO);
             }
@@ -94,8 +94,7 @@ public class OrderServiceImpl implements OrderService {
         //把购物车对象转为订单item对象
         List<OrderItem> orderItemList = cartVOListToOrderItemList(cartVOList);
         //扣库存
-        for (int i = 0; i < orderItemList.size(); i++) {
-            OrderItem orderItem = orderItemList.get(i);
+        for (OrderItem orderItem : orderItemList) {
             Product product = productMapper.selectByPrimaryKey(orderItem.getProductId());
             int stock = product.getStock() - orderItem.getQuantity();
             if (stock < 0) {
@@ -123,8 +122,7 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.insertSelective(order);
 
         //循环保存每个商品到order_item表
-        for (int i = 0; i < orderItemList.size(); i++) {
-            OrderItem orderItem = orderItemList.get(i);
+        for (OrderItem orderItem : orderItemList) {
             orderItem.setOrderNo(order.getOrderNo());
             orderItemMapper.insertSelective(orderItem);
         }
@@ -148,10 +146,15 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    /**
+     * 把购物车对象转为订单item对象
+     * @param cartVOList
+     * @return
+     */
     private List<OrderItem> cartVOListToOrderItemList(List<CartVO> cartVOList) {
         List<OrderItem> orderItemList = new ArrayList<>();
-        for (int i = 0; i < cartVOList.size(); i++) {
-            CartVO cartVO = cartVOList.get(i);
+        //将购物车中的每一个商品都生成一个订单项
+        for (CartVO cartVO : cartVOList) {
             OrderItem orderItem = new OrderItem();
             orderItem.setProductId(cartVO.getProductId());
             //记录商品快照信息
@@ -165,15 +168,20 @@ public class OrderServiceImpl implements OrderService {
         return orderItemList;
     }
 
+    /**
+     * 判断商品是否存在、上下架状态、库存
+     * @param cartVOList
+     */
     private void validSaleStatusAndStock(List<CartVO> cartVOList) {
-        for (int i = 0; i < cartVOList.size(); i++) {
-            CartVO cartVO = cartVOList.get(i);
+        //遍历判断购物车中的每一个商品是否合法
+        for (CartVO cartVO : cartVOList) {
+            //通过购物车中商品去查找商品信息
             Product product = productMapper.selectByPrimaryKey(cartVO.getProductId());
             //判断商品是否存在，商品是否上架
             if (product == null || product.getStatus().equals(Constant.SaleStatus.NOT_SALE)) {
                 throw new SouthMallException(SouthMallExceptionEnum.NOT_SALE);
             }
-            //判断商品库存
+            //判断商品库存（购物车数量大于库存，报错）
             if (cartVO.getQuantity() > product.getStock()) {
                 throw new SouthMallException(SouthMallExceptionEnum.NOT_ENOUGH);
             }

@@ -1,14 +1,16 @@
 package top.top6699.mall.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import top.top6699.mall.common.ApiRestResponse;
 import top.top6699.mall.common.Constant;
 import top.top6699.mall.exception.SouthMallException;
 import top.top6699.mall.exception.SouthMallExceptionEnum;
 import top.top6699.mall.model.pojo.User;
+import top.top6699.mall.model.request.UserReq;
 import top.top6699.mall.service.UserService;
 
 import javax.servlet.http.HttpSession;
@@ -18,15 +20,15 @@ import javax.servlet.http.HttpSession;
  * @date 2021/10/8 22:17
  * @description 用户Controller
  **/
-@Controller
+@RestController
 public class UserController {
     @Autowired
     UserService userService;
 
-    @ResponseBody
     @PostMapping("user/register")
-    public ApiRestResponse register(@RequestParam("username") String username,
-                                    @RequestParam("password") String password) throws SouthMallException {
+    public ApiRestResponse register(@RequestBody UserReq userReq) throws SouthMallException {
+        String username = userReq.getUsername();
+        String password = userReq.getPassword();
         //利用Spring框架中的StringUtils.isEmpty方式来判断是否为空
         if (StringUtils.isEmpty(username)) {
             return ApiRestResponse.error(SouthMallExceptionEnum.NEED_USER_NAME);
@@ -42,11 +44,11 @@ public class UserController {
         return ApiRestResponse.success();
     }
 
-    @ResponseBody
     @PostMapping("user/login")
-    public ApiRestResponse login(@RequestParam("username") String username,
-                                 @RequestParam("password") String password,
+    public ApiRestResponse login(@RequestBody UserReq userReq,
                                  HttpSession session) throws SouthMallException {
+        String username = userReq.getUsername();
+        String password = userReq.getPassword();
         //利用Spring框架中的StringUtils.isEmpty方式来判断是否为空
         if (StringUtils.isEmpty(username)) {
             return ApiRestResponse.error(SouthMallExceptionEnum.NEED_USER_NAME);
@@ -66,8 +68,8 @@ public class UserController {
     }
 
     @PostMapping("user/update")
-    @ResponseBody
-    public ApiRestResponse updateUserInfo(HttpSession session, @RequestParam("signature") String signature) throws SouthMallException {
+    public ApiRestResponse updateUserInfo(HttpSession session, @RequestBody UserReq userReq) throws SouthMallException {
+        String signature = userReq.getSignature();
         User currentUser = (User) session.getAttribute(Constant.SOUTH_MALL_USER);
         if (currentUser == null) {
             return ApiRestResponse.error(SouthMallExceptionEnum.NEED_LOGIN);
@@ -80,17 +82,16 @@ public class UserController {
     }
 
     @PostMapping("user/logout")
-    @ResponseBody
     public ApiRestResponse logout(HttpSession session) {
         session.removeAttribute(Constant.SOUTH_MALL_USER);
         return ApiRestResponse.success();
     }
 
-    @ResponseBody
     @PostMapping("user/adminLogin")
-    public ApiRestResponse adminLogin(@RequestParam("username") String username,
-                                      @RequestParam("password") String password,
+    public ApiRestResponse adminLogin(@RequestBody UserReq userReq,
                                       HttpSession session) throws SouthMallException {
+        String username = userReq.getUsername();
+        String password = userReq.getPassword();
         //利用Spring框架中的StringUtils.isEmpty方式来判断是否为空
         if (StringUtils.isEmpty(username)) {
             return ApiRestResponse.error(SouthMallExceptionEnum.NEED_USER_NAME);

@@ -28,15 +28,31 @@ public class CartServiceImpl implements CartService {
     @Autowired
     CartMapper cartMapper;
 
+    /**
+     * 购物车商品信息
+     *
+     * @param userId
+     * @return
+     */
     @Override
     public List<CartVO> list(Integer userId) {
+        //查找购物车信息
         List<CartVO> cartVOS = cartMapper.selectList(userId);
         for (CartVO cartVO : cartVOS) {
+            //计算购物车商品总价，数据库中没有总价这个记录，需要手动计算
             cartVO.setTotalPrice(cartVO.getPrice() * cartVO.getQuantity());
         }
         return cartVOS;
     }
 
+    /**
+     * 添加商品到购物车
+     *
+     * @param userId
+     * @param productId
+     * @param count
+     * @return
+     */
     @Override
     public List<CartVO> add(Integer userId, Integer productId, Integer count) {
         validProduct(productId, count);
@@ -64,6 +80,12 @@ public class CartServiceImpl implements CartService {
         return this.list(userId);
     }
 
+    /**
+     * 判断商品合法性
+     *
+     * @param productId
+     * @param count
+     */
     private void validProduct(Integer productId, Integer count) {
         Product product = productMapper.selectByPrimaryKey(productId);
         //判断商品是否存在，商品是否上架
@@ -76,6 +98,14 @@ public class CartServiceImpl implements CartService {
         }
     }
 
+    /**
+     * 更新购物车商品
+     *
+     * @param userId
+     * @param productId
+     * @param count
+     * @return
+     */
     @Override
     public List<CartVO> update(Integer userId, Integer productId, Integer count) {
         validProduct(productId, count);
@@ -97,6 +127,13 @@ public class CartServiceImpl implements CartService {
         return this.list(userId);
     }
 
+    /**
+     * 删除购物车商品
+     *
+     * @param userId
+     * @param productId
+     * @return
+     */
     @Override
     public List<CartVO> delete(Integer userId, Integer productId) {
         Cart cart = cartMapper.selectCartByUserIdAndProductId(userId, productId);
@@ -110,6 +147,14 @@ public class CartServiceImpl implements CartService {
         return this.list(userId);
     }
 
+    /**
+     * 选择/不选商品
+     *
+     * @param userId
+     * @param productId
+     * @param selected
+     * @return
+     */
     @Override
     public List<CartVO> selectOrNot(Integer userId, Integer productId, Integer selected) {
         Cart cart = cartMapper.selectCartByUserIdAndProductId(userId, productId);
@@ -123,6 +168,13 @@ public class CartServiceImpl implements CartService {
         return this.list(userId);
     }
 
+    /**
+     * 全选/全不选商品
+     *
+     * @param userId
+     * @param selected
+     * @return
+     */
     @Override
     public List<CartVO> selectAllOrNot(Integer userId, Integer selected) {
         //改变选中状态
