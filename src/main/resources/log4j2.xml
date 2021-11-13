@@ -2,7 +2,7 @@
 <Configuration status="fatal">
     <Properties>
         <!--log日志所在位置-->
-        <Property name="baseDir" value="E:\log4j2\logs"/>
+        <Property name="baseDir" value="/usr/local/south_mall/logs"/>
 
     </Properties>
 

@@ -28,7 +28,7 @@ public class QRCodeGenerator {
 
     public static void main(String[] args) {
         try {
-            generateQRCodeImage("Hello World", 350, 350, "QRTest.png");
+            generateQRCodeImage("Hello World111", 350, 350, "QRTest.png");
         } catch (WriterException e) {
             e.printStackTrace();
         } catch (IOException e) {
