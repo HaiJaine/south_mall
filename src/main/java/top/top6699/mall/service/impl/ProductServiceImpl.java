@@ -75,13 +75,27 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    /**
+     * 批量上下架商品
+     *
+     * @param ids
+     * @param sellStatus
+     */
     @Override
     public void batchUpdateSellStatus(Integer[] ids, Integer sellStatus) {
         productMapper.batchUpdateSellStatus(ids, sellStatus);
     }
 
+    /**
+     * 管理员查看的列表
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @Override
     public PageInfo listForAdmin(Integer pageNum, Integer pageSize) {
+        //分页工具
         PageHelper.startPage(pageNum, pageSize);
         List<Product> products = productMapper.selectListForAdmin();
         PageInfo pageInfo = new PageInfo(products);
@@ -90,22 +104,27 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product detail(Integer id) {
-        Product product = productMapper.selectByPrimaryKey(id);
-        return product;
+        return productMapper.selectByPrimaryKey(id);
     }
 
+    /**
+     * 前台用户查看的列表
+     *
+     * @param productListReq
+     * @return
+     */
     @Override
     public PageInfo list(ProductListReq productListReq) {
         //构建Query对象
         ProductListQuery productListQuery = new ProductListQuery();
 
         //搜索处理
-        if (!StringUtils.isEmpty(productListReq.getKeyword())) {
-            String keyword = new StringBuilder().append("%").append(productListReq.getKeyword())
-                    .append("%").toString();
+        if (!StringUtils.isEmpty(productListReq.getKeyword())) {//判断是否包含查询keyword
+            String keyword = "%" + productListReq.getKeyword() + "%";
             productListQuery.setKeyword(keyword);
         }
 
+        //todo 前台条件查询
         //目录处理：如果查某个目录下的商品，不仅是需要查出该目录下的，还要把所有子目录的所有商品都查出来，所以要拿到一个目录id的List
         if (productListReq.getCategoryId() != null) {
             List<CategoryVO> categoryVOList = categoryService
@@ -132,8 +151,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void getCategoryIds(List<CategoryVO> categoryVOList, ArrayList<Integer> categoryIds) {
-        for (int i = 0; i < categoryVOList.size(); i++) {
-            CategoryVO categoryVO = categoryVOList.get(i);
+        for (CategoryVO categoryVO : categoryVOList) {
             if (categoryVO != null) {
                 categoryIds.add(categoryVO.getId());
                 getCategoryIds(categoryVO.getChildCategory(), categoryIds);

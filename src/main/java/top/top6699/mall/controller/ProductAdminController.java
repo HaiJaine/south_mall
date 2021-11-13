@@ -45,6 +45,7 @@ public class ProductAdminController {
                                   @RequestParam("file") MultipartFile file) {
         String fileName = file.getOriginalFilename();
         assert fileName != null;
+        //截取文件名，找到最后一个点所在位置
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
         //生成文件名称UUID
         UUID uuid = UUID.randomUUID();
@@ -58,11 +59,13 @@ public class ProductAdminController {
             }
         }
         try {
+            //将传入的文件写入到目标位置中
             file.transferTo(destFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
+            //返回生成的地址
             return ApiRestResponse
                     .success(getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/images/"
                             + newFileName);

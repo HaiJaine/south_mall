@@ -28,6 +28,7 @@ public class Constant {
         FILE_UPLOAD_DIR = fileUploadDir;
     }
 
+    //定义支持的排序字段
     public interface ProductListOrderBy {
 
         Set<String> PRICE_ASC_DESC = Sets.newHashSet("price desc", "price asc");

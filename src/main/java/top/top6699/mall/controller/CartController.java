@@ -33,6 +33,7 @@ public class CartController {
     @PostMapping("/add")
     @ApiOperation("添加商品到购物车")
     public ApiRestResponse add(@RequestParam Integer productId, @RequestParam Integer count) {
+        //添加商品后，需要返回购物车信息
         List<CartVO> cartVOList = cartService.add(UserFilter.currentUser.getId(), productId, count);
         return ApiRestResponse.success(cartVOList);
     }

@@ -29,6 +29,11 @@ public class ProductController {
         return ApiRestResponse.success(product);
     }
 
+    /**
+     *
+     * @param productListReq  参数类
+     * @return
+     */
     @ApiOperation("商品详情")
     @GetMapping("product/list")
     public ApiRestResponse list(ProductListReq productListReq) {
