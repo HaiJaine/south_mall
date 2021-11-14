@@ -148,6 +148,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 把购物车对象转为订单item对象
+     *
      * @param cartVOList
      * @return
      */
@@ -157,7 +158,7 @@ public class OrderServiceImpl implements OrderService {
         for (CartVO cartVO : cartVOList) {
             OrderItem orderItem = new OrderItem();
             orderItem.setProductId(cartVO.getProductId());
-            //记录商品快照信息
+            //记录商品快照信息（后期商品可能修改名称、图片、价格、数量、总价等信息）
             orderItem.setProductName(cartVO.getProductName());
             orderItem.setProductImg(cartVO.getProductImage());
             orderItem.setUnitPrice(cartVO.getPrice());
@@ -170,6 +171,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 判断商品是否存在、上下架状态、库存
+     *
      * @param cartVOList
      */
     private void validSaleStatusAndStock(List<CartVO> cartVOList) {
