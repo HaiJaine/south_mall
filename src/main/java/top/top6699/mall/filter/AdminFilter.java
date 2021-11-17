@@ -34,6 +34,7 @@ public class AdminFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute(Constant.SOUTH_MALL_USER);
+        servletResponse.setContentType("application/json;charset=utf-8");
         if (currentUser == null) {
             PrintWriter out = new HttpServletResponseWrapper(
                     (HttpServletResponse) servletResponse).getWriter();

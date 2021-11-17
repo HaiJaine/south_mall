@@ -35,6 +35,7 @@ public class UserFilter implements Filter {
                          FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
+        servletResponse.setContentType("application/json;charset=utf-8");
         currentUser = (User) session.getAttribute(Constant.SOUTH_MALL_USER);
         if (currentUser == null) {
             PrintWriter out = new HttpServletResponseWrapper(

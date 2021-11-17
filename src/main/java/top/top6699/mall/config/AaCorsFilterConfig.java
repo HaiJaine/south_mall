@@ -3,7 +3,7 @@ package top.top6699.mall.config;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import top.top6699.mall.filter.AdminFilter;
+import top.top6699.mall.filter.AaCorsFilter;
 
 /**
  * @author LongHaiJiang
@@ -11,22 +11,19 @@ import top.top6699.mall.filter.AdminFilter;
  * @description Admin过滤器的配置
  **/
 @Configuration
-public class AdminFilterConfig {
+public class AaCorsFilterConfig {
 
     @Bean
-    public AdminFilter adminFilter() {
-        return new AdminFilter();
+    public AaCorsFilter aaCorsFilter() {
+        return new AaCorsFilter();
     }
 
-    @Bean(name = "adminFilterConf")
+    @Bean(name = "aaCorsFilterConf")
     public FilterRegistrationBean adminFilterConfig() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        filterRegistrationBean.setFilter(adminFilter());
-        filterRegistrationBean.addUrlPatterns("/admin/category/*");
-        filterRegistrationBean.addUrlPatterns("/admin/product/*");
-        filterRegistrationBean.addUrlPatterns("/admin/order/*");
-
-        filterRegistrationBean.setName("adminFilterConf");
+        filterRegistrationBean.setFilter(aaCorsFilter());
+        filterRegistrationBean.addUrlPatterns("/*");
+        filterRegistrationBean.setName("aaCorsFilterConf");
         return filterRegistrationBean;
     }
 }
