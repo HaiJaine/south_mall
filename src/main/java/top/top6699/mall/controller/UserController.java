@@ -2,6 +2,7 @@ package top.top6699.mall.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("user/register")
+    @CrossOrigin
     public ApiRestResponse register(@RequestBody UserReq userReq) throws SouthMallException {
         String username = userReq.getUsername();
         String password = userReq.getPassword();
@@ -45,6 +47,7 @@ public class UserController {
     }
 
     @PostMapping("user/login")
+    @CrossOrigin
     public ApiRestResponse login(@RequestBody UserReq userReq,
                                  HttpSession session) throws SouthMallException {
         String username = userReq.getUsername();
@@ -68,6 +71,7 @@ public class UserController {
     }
 
     @PostMapping("user/update")
+    @CrossOrigin
     public ApiRestResponse updateUserInfo(HttpSession session, @RequestBody UserReq userReq) throws SouthMallException {
         String signature = userReq.getSignature();
         User currentUser = (User) session.getAttribute(Constant.SOUTH_MALL_USER);
@@ -82,12 +86,14 @@ public class UserController {
     }
 
     @PostMapping("user/logout")
+    @CrossOrigin
     public ApiRestResponse logout(HttpSession session) {
         session.removeAttribute(Constant.SOUTH_MALL_USER);
         return ApiRestResponse.success();
     }
 
     @PostMapping("user/adminLogin")
+    @CrossOrigin
     public ApiRestResponse adminLogin(@RequestBody UserReq userReq,
                                       HttpSession session) throws SouthMallException {
         String username = userReq.getUsername();

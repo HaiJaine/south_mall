@@ -3,10 +3,7 @@ package top.top6699.mall.controller;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.top6699.mall.common.ApiRestResponse;
 import top.top6699.mall.service.OrderService;
 
@@ -16,6 +13,7 @@ import top.top6699.mall.service.OrderService;
  * @description 订单后台管理Controller
  **/
 @RestController
+@CrossOrigin
 public class OrderAdminController {
 
     @Autowired
@@ -23,6 +21,7 @@ public class OrderAdminController {
 
     @GetMapping("admin/order/list")
     @ApiOperation("管理员订单列表")
+
     public ApiRestResponse listForAdmin(@RequestParam Integer pageNum,
                                         @RequestParam Integer pageSize) {
         PageInfo pageInfo = orderService.listForAdmin(pageNum, pageSize);
@@ -34,6 +33,7 @@ public class OrderAdminController {
      */
     @PostMapping("admin/order/delivered")
     @ApiOperation("管理员发货")
+
     public ApiRestResponse delivered(@RequestParam String orderNo) {
         orderService.deliver(orderNo);
         return ApiRestResponse.success();

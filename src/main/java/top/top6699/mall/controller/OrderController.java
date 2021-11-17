@@ -17,6 +17,7 @@ import javax.validation.Valid;
  * @description 订单Controller
  **/
 @RestController
+@CrossOrigin
 public class OrderController {
 
     @Autowired
@@ -24,6 +25,7 @@ public class OrderController {
 
     @PostMapping("order/create")
     @ApiOperation("创建订单")
+
     public ApiRestResponse create(@RequestBody @Valid CreateOrderReq createOrderReq) {
         String orderNo = orderService.create(createOrderReq);
         return ApiRestResponse.success(orderNo);
@@ -31,6 +33,7 @@ public class OrderController {
 
     @GetMapping("order/detail")
     @ApiOperation("前台订单详情")
+
     public ApiRestResponse detail(@RequestParam String orderNo) {
         OrderVO orderVO = orderService.detail(orderNo);
         return ApiRestResponse.success(orderVO);
@@ -38,6 +41,7 @@ public class OrderController {
 
     @GetMapping("order/list")
     @ApiOperation("前台订单列表")
+
     public ApiRestResponse list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         PageInfo pageInfo = orderService.listForCustomer(pageNum, pageSize);
         return ApiRestResponse.success(pageInfo);
@@ -48,6 +52,7 @@ public class OrderController {
      */
     @PostMapping("order/cancel")
     @ApiOperation("前台取消订单")
+
     public ApiRestResponse cancel(@RequestParam String orderNo) {
         orderService.cancel(orderNo);
         return ApiRestResponse.success();
@@ -58,6 +63,7 @@ public class OrderController {
      */
     @GetMapping("order/qrcode")
     @ApiOperation("生成支付二维码")
+
     public ApiRestResponse qrcode(@RequestParam String orderNo) {
         String pngAddress = orderService.qrcode(orderNo);
         return ApiRestResponse.success(pngAddress);
@@ -65,6 +71,7 @@ public class OrderController {
 
     @GetMapping("pay")
     @ApiOperation("支付接口")
+
     public ApiRestResponse pay(@RequestParam String orderNo) {
         orderService.pay(orderNo);
         return ApiRestResponse.success();
