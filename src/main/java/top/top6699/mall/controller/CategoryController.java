@@ -26,7 +26,8 @@ import java.util.List;
  * @date 2021/10/22 14:55
  * @description 目录Controller
  **/
-@Controller
+@RestController
+@CrossOrigin
 public class CategoryController {
     @Autowired
     UserService userService;
@@ -39,7 +40,6 @@ public class CategoryController {
      */
     @ApiOperation("后台添加目录")
     @PostMapping("admin/category/add")
-    @ResponseBody
     public ApiRestResponse addCategory(HttpSession session,
                                        @Valid @RequestBody AddCategoryReq addCategoryReq) {
         User currentUser = (User) session.getAttribute(Constant.SOUTH_MALL_USER);
@@ -59,7 +59,6 @@ public class CategoryController {
 
     @ApiOperation("后台更新目录")
     @PostMapping("admin/category/update")
-    @ResponseBody
     public ApiRestResponse updateCategory(@Valid @RequestBody UpdateCategoryReq updateCategoryReq,
                                           HttpSession session) {
         User currentUser = (User) session.getAttribute(Constant.SOUTH_MALL_USER);
@@ -81,7 +80,6 @@ public class CategoryController {
 
     @ApiOperation("后台删除目录")
     @PostMapping("admin/category/delete")
-    @ResponseBody
     public ApiRestResponse deleteCategory(@RequestParam Integer id) {
         categoryService.delete(id);
         return ApiRestResponse.success();
@@ -89,7 +87,6 @@ public class CategoryController {
 
     @ApiOperation("后台目录列表")
     @GetMapping("admin/category/list")
-    @ResponseBody
     public ApiRestResponse listCategoryForAdmin(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         PageInfo pageInfo = categoryService.listForAdmin(pageNum, pageSize);
         return ApiRestResponse.success(pageInfo);
@@ -97,7 +94,6 @@ public class CategoryController {
 
     @ApiOperation("前台目录列表")
     @GetMapping("category/list")
-    @ResponseBody
     public ApiRestResponse listCategoryForCustomer() {
         List<CategoryVO> categoryVOS = categoryService.listCategoryForCustomer(0);
         return ApiRestResponse.success(categoryVOS);

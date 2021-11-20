@@ -29,12 +29,14 @@ import java.util.UUID;
  * @description 后台商品管理Controller
  **/
 @RestController
+@CrossOrigin
 public class ProductAdminController {
 
     @Autowired
     ProductService productService;
 
     @PostMapping("/admin/product/add")
+
     public ApiRestResponse addProduct(@Valid @RequestBody AddProductReq addProductReq) {
         productService.add(addProductReq);
         return ApiRestResponse.success();
