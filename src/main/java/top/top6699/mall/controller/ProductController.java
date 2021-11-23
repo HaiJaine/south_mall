@@ -37,7 +37,7 @@ public class ProductController {
      * @param productListReq  参数类
      * @return
      */
-    @ApiOperation("商品详情")
+    @ApiOperation("商品列表")
     @GetMapping("product/list")
     public ApiRestResponse list(ProductListReq productListReq) {
         PageInfo list = productService.list(productListReq);

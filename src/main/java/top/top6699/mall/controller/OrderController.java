@@ -69,7 +69,7 @@ public class OrderController {
         return ApiRestResponse.success(pngAddress);
     }
 
-    @PostMapping("pay")
+    @GetMapping("pay")
     @ApiOperation("支付接口")
 
     public ApiRestResponse pay(@RequestParam String orderNo) {

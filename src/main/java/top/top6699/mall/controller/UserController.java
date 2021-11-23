@@ -122,4 +122,5 @@ public class UserController {
             return ApiRestResponse.error(SouthMallExceptionEnum.NEED_ADMIN);
         }
     }
+
 }

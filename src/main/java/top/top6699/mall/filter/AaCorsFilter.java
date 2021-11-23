@@ -30,6 +30,12 @@ public class AaCorsFilter implements Filter {
                 "http://localhost",
                 "http://127.0.0.1:8080",
                 "http://localhost:8080",
+                "http://localhost:8081",
+                "http://127.0.0.1:8081",
+                "http://top6699.top:8083",
+                "https://top6699.top:8083",
+                "http://47.108.220.187:8083",
+                "https://47.108.220.187:8083",
         };
         String origin = req.getHeader("Origin");
         if (Arrays.asList(allowDomain).contains(origin)) {
