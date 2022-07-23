@@ -11,5 +11,6 @@ public class E5test {
     // 活跃GitHub
     public static void main(String[] args) {
         System.out.println("活跃GitHub");
+        System.out.println("活跃GitHub");
     }
 }
